@@ -1,0 +1,316 @@
+body {
+    padding-top: 70px;
+    background-color: #f8f9fa;
+}
+
+.filter-group {
+    min-width: 220px;
+}
+
+.filter-group .dropdown-menu {
+    min-width: 250px;
+}
+
+.filter-group .dropdown-menu li {
+    list-style: none;
+}
+
+.filter-group .dropdown-menu .form-check {
+    padding-left: 1.5rem;
+}
+
+.filter-group .dropdown-menu .form-check-input {
+    cursor: pointer;
+}
+
+.filter-group .dropdown-menu .form-check-label {
+    cursor: pointer;
+    user-select: none;
+}
+
+.filter-label {
+    display: inline-block;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
+.chart-container-large {
+    position: relative;
+    height: 440px;
+    width: 100%;
+}
+
+.chart-container-medium {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+.chart-container-small {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+/* Styles for the text inside the doughnut chart */
+#overallAdherenceContainer {
+    position: relative;
+}
+
+.chart-text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #495057;
+    pointer-events: none;
+}
+
+/* Visual cue for clickable elements */
+#srsOutcomeChart,
+#sureCompositeChart {
+    cursor: pointer;
+}
+
+/* Styling for the transcript snippet modal */
+.transcript-line {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.transcript-line.target-turn {
+    background-color: #fffbe6;
+    border-left: 4px solid #ffc107;
+    padding-left: 15px;
+}
+
+.transcript-line strong {
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+.transcript-line p {
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(248, 249, 250, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    pointer-events: all;
+}
+
+#loadingOverlay .loading-content {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+}
+
+#loadingOverlay .loading-content p {
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+/* Section styling */
+#advanced-analytics .card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+#advanced-analytics .card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Border colors for different visualization types */
+.card.border-warning {
+    border-width: 2px !important;
+}
+
+.card.border-danger {
+    border-width: 2px !important;
+}
+
+.card.border-info {
+    border-width: 2px !important;
+}
+
+.card.border-primary {
+    border-width: 2px !important;
+}
+
+.card.border-secondary {
+    border-width: 2px !important;
+}
+
+/* ============================================================================
+   EQUITY AUDIT & NEW FEATURES STYLES
+   Add these to your existing styles.css file
+   ============================================================================ */
+
+/* Section styling */
+#equity-audit .card,
+#score-trends .card,
+#patient-comparisons .card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+#equity-audit .card:hover,
+#score-trends .card:hover,
+#patient-comparisons .card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Statistics panel */
+#equityStats {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    border: 1px solid #dee2e6;
+}
+
+#equityStats .d-flex {
+    margin-bottom: 0.5rem;
+}
+
+/* Statistics highlight */
+#equityStats strong {
+    font-size: 1.1em;
+}
+
+/* Apply/Reset buttons in dropdowns */
+.dropdown-menu .btn-sm {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.75rem;
+}
+
+/* Select All checkbox styling */
+.dropdown-menu .form-check:first-child {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.dropdown-menu .form-check:first-child label {
+    font-weight: 600;
+}
+
+/* Dropdown divider before buttons */
+.dropdown-menu hr.dropdown-divider {
+    margin: 0.5rem 0;
+}
+
+.transcript-block {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    padding: 1rem;
+}
+
+.transcript-entry {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f1f3f5;
+}
+
+.transcript-entry:last-child {
+    border-bottom: 0;
+}
+
+.transcript-entry.crisis-turn {
+    background-color: #fff5f5;
+    border-left: 4px solid #dc3545;
+    padding-left: 0.75rem;
+    border-radius: 0.25rem;
+}
+
+.intensity-chip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #dee2e6;
+    border-radius: 999px;
+    padding: 0.35rem 0.9rem;
+    background-color: #fff;
+    font-size: 0.875rem;
+}
+
+.intensity-chip .chip-label {
+    color: #495057;
+    margin-right: 0.75rem;
+}
+
+.intensity-chip .chip-value {
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    #equity-audit .chart-container,
+    #score-trends .chart-container,
+    #patient-comparisons .chart-container {
+        height: 350px;
+    }
+    
+    #equityStats {
+        margin-top: 1rem;
+    }
+}
+
+/* Hover effects for interactive elements */
+#equity-audit canvas,
+#score-trends canvas,
+#patient-comparisons canvas {
+    cursor: crosshair;
+}
+
+/* Dropdown menu improvements */
+.dropdown-menu {
+    border-radius: 0.375rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Print styles */
+@media print {/* Lines 295-311 omitted */}
+
+/* Footer styles */
+.site-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    padding: 2rem 0;
+    margin-top: 3rem;
+}
+
+.site-footer p {
+    margin-bottom: 0;
+    color: #6c757d;
+}
+
+.site-footer a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}

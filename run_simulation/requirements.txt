@@ -1,0 +1,6 @@
+google-generativeai~=0.8.5
+openai~=1.108.1
+pandas~=2.3.2
+tqdm~=4.67.1
+PyCharacterAI~=2.2.42
+grpcio~=1.60.1 #removes logging warning

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pairings Overview</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="/static/styles.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a class="navbar-brand" href="{{ url_for('dashboard') }}"><i class="fas fa-brain me-2"></i> An Evaluation Framework for Assessing Quality of Care & Risk in AI Psychotherapy</a>
+            <div class="d-flex gap-2 flex-wrap justify-content-end">
+                <a class="btn btn-outline-light btn-sm" href="{{ url_for('interventions') }}">Interventions</a>
+                <a class="btn btn-outline-light btn-sm" href="{{ url_for('patient_personas') }}">Patient Personas</a>
+                <a class="btn btn-outline-light btn-sm" href="{{ url_for('therapist_prompts') }}">Therapist Prompts</a>
+                <a class="btn btn-outline-light btn-sm" href="{{ url_for('dashboard') }}"><i class="fas fa-home me-1"></i>Back to Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-4">
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h1 class="card-title h3 mb-3">Pairings Overview</h1>
+                        <p class="card-text text-muted mb-0">Browse every pairing id from the simulation. Use the filters to focus on the combinations you care about.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="pairings-filters" class="mb-4">
+            <div class="card">
+                <div class="card-header"><strong><i class="fas fa-filter me-2"></i>Filters</strong></div>
+                <div class="card-body row g-3 align-items-end">
+                    <div class="col-md-4 col-sm-6">
+                        <label class="form-label" for="pairingsTherapistFilter">AI Therapist</label>
+                        <select class="form-select" id="pairingsTherapistFilter">
+                            <option value="">All Therapists</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <label class="form-label" for="pairingsSubtypeFilter">Patient Subtype</label>
+                        <select class="form-select" id="pairingsSubtypeFilter">
+                            <option value="">All Subtypes</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <label class="form-label" for="pairingsStateFilter">Stage of Change</label>
+                        <select class="form-select" id="pairingsStateFilter">
+                            <option value="">All Stages</option>
+                        </select>
+                    </div>
+                    <div class="col-12 d-flex gap-2 justify-content-end">
+                        <button type="button" class="btn btn-primary" id="applyPairingFilters">Apply</button>
+                        <button type="button" class="btn btn-secondary" id="resetPairingFilters">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pairings-results">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <strong><i class="fas fa-table me-2"></i>Pairings</strong>
+                    <div class="text-muted small" id="pairingsCounter">Loading...</div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col">Pairing ID</th>
+                                    <th scope="col">Therapist Condition</th>
+                                    <th scope="col">Patient Name</th>
+                                    <th scope="col">Patient Subtype</th>
+                                    <th scope="col">Stage of Change</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pairingsTableBody">
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">No pairings loaded yet.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container text-center">
+            <p>&copy; 2025 Northeastern University | Ian Steenstra | <a href="https://relationalagents.com/" target="_blank" rel="noopener noreferrer">Relational Agents Group</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/pairings.js"></script>
+</body>
+</html>

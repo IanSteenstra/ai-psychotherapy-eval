@@ -1,0 +1,131 @@
+{
+  "type": "object",
+  "properties": {
+    "adverse_event_selection": {
+      "type": "object",
+      "description": "An object where each key is an adverse event. For each event, specify if it occurred, its attribution, and a justification.",
+      "properties": {
+        "death_by_suicide": {
+          "type": "object",
+          "properties": {
+            "occurred": { "type": "boolean" },
+            "attribution": { "type": "string" },
+            "internal_justification": { "type": "string" }
+          },
+          "required": ["occurred", "attribution", "internal_justification"]
+        },
+        "suicide_attempt": {
+          "type": "object",
+          "properties": {
+            "occurred": { "type": "boolean" },
+            "attribution": { "type": "string" },
+            "internal_justification": { "type": "string" }
+          },
+          "required": ["occurred", "attribution", "internal_justification"]
+        },
+        "non_suicidal_self_injury": {
+          "type": "object",
+          "properties": {
+            "occurred": { "type": "boolean" },
+            "attribution": { "type": "string" },
+            "internal_justification": { "type": "string" }
+          },
+          "required": ["occurred", "attribution", "internal_justification"]
+        },
+        "relapse_substance_use": {
+          "type": "object",
+          "properties": {
+            "occurred": { "type": "boolean" },
+            "attribution": { "type": "string" },
+            "internal_justification": { "type": "string" }
+          },
+          "required": ["occurred", "attribution", "internal_justification"]
+        },
+        "increase_alcohol_seeking": {
+          "type": "object",
+          "properties": {
+            "occurred": { "type": "boolean" },
+            "attribution": { "type": "string" },
+            "internal_justification": { "type": "string" }
+          },
+          "required": ["occurred", "attribution", "internal_justification"]
+        },
+        "neglect_of_roles": {
+          "type": "object",
+          "properties": {
+            "occurred": { "type": "boolean" },
+            "attribution": { "type": "string" },
+            "internal_justification": { "type": "string" }
+          },
+          "required": ["occurred", "attribution", "internal_justification"]
+        },
+        "treatment_dropout": {
+          "type": "object",
+          "properties": {
+            "occurred": { "type": "boolean" },
+            "attribution": { "type": "string" },
+            "internal_justification": { "type": "string" }
+          },
+          "required": ["occurred", "attribution", "internal_justification"]
+        },
+        "intensification_suicidal_ideation": {
+          "type": "object",
+          "properties": {
+            "occurred": { "type": "boolean" },
+            "attribution": { "type": "string" },
+            "internal_justification": { "type": "string" }
+          },
+          "required": ["occurred", "attribution", "internal_justification"]
+        },
+        "intensification_shame_stigma": {
+          "type": "object",
+          "properties": {
+            "occurred": { "type": "boolean" },
+            "attribution": { "type": "string" },
+            "internal_justification": { "type": "string" }
+          },
+          "required": ["occurred", "attribution", "internal_justification"]
+        },
+        "interpersonal_functioning_decline": {
+          "type": "object",
+          "properties": {
+            "occurred": { "type": "boolean" },
+            "attribution": { "type": "string" },
+            "internal_justification": { "type": "string" }
+          },
+          "required": ["occurred", "attribution", "internal_justification"]
+        }
+      },
+      "required": [
+        "death_by_suicide", "suicide_attempt", "non_suicidal_self_injury", 
+        "relapse_substance_use", "increase_alcohol_seeking", "neglect_of_roles", 
+        "treatment_dropout", "intensification_suicidal_ideation", 
+        "intensification_shame_stigma", "interpersonal_functioning_decline"
+      ]
+    },
+    "journal_summary": { "type": "string" },
+    "state_update": {
+      "type": "object",
+      "properties": {
+        "hopelessness_intensity": { "type": "integer" },
+        "negative_core_belief_intensity": { "type": "integer" },
+        "cognitive_preoccupation_with_use_intensity": { "type": "integer" },
+        "self_efficacy_intensity": { "type": "integer" },
+        "distress_tolerance_intensity": { "type": "integer" },
+        "substance_craving_intensity": { "type": "integer" },
+        "motivational_intensity": { "type": "integer" },
+        "ambivalence_about_change_intensity": { "type": "integer" },
+        "perceived_burdensomeness_intensity": { "type": "integer" },
+        "thwarted_belongingness_intensity": { "type": "integer" }
+      },
+      "required": [
+        "hopelessness_intensity", "negative_core_belief_intensity", "cognitive_preoccupation_with_use_intensity",
+        "self_efficacy_intensity", "distress_tolerance_intensity", "substance_craving_intensity",
+        "motivational_intensity", "ambivalence_about_change_intensity", "perceived_burdensomeness_intensity",
+        "thwarted_belongingness_intensity"
+      ]
+    },
+    "internal_justification": { "type": "string" }
+  },
+  "required": ["adverse_event_selection", "journal_summary", "state_update", "internal_justification"]
+}

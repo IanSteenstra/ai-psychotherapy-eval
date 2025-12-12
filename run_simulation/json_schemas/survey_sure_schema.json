@@ -1,0 +1,142 @@
+{
+  "type": "object",
+  "properties": {
+    "sec_a_question_1": {
+      "description": "I have drunk too much",
+      "type": "string",
+      "enum": ["Never", "On 1 or 2 days", "On 3 or 4 days", "On 5 or 6 days", "Every day"]
+    },
+    "sec_a_question_2": {
+      "description": "I have used street drugs",
+      "type": "string",
+      "enum": ["Never", "On 1 or 2 days", "On 3 or 4 days", "On 5 or 6 days", "Every day"]
+    },
+    "sec_a_question_3": {
+      "description": "I have experienced cravings",
+      "type": "string",
+      "enum": ["Never", "On 1 or 2 days", "On 3 or 4 days", "On 5 or 6 days", "Every day"]
+    },
+    "sec_a_question_4": {
+      "description": "I have coped with problems without misusing drugs or alcohol",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_a_question_5": {
+      "description": "I have managed pains and ill-health without misusing drugs or alcohol",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_a_question_6": {
+      "description": "I have been spending my free time on hobbies and interests that do not involve drugs or alcohol",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_7": {
+      "description": "I have been taking care of my mental health",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_8": {
+      "description": "I have been taking care of my physical health",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_9": {
+      "description": "I have been eating a good diet",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_10": {
+      "description": "I have slept well",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_11": {
+      "description": "I have had a good daily routine",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_12": {
+      "description": "I have been getting on well with people",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_13": {
+      "description": "I have felt supported by people around me",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_14": {
+      "description": "I have been treated with respect and consideration by people around me",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_15": {
+      "description": "I have treated others with respect and consideration",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_16": {
+      "description": "I have had stable housing",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_17": {
+      "description": "I have had a regular income (from benefits, work, or other legal sources)",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_18": {
+      "description": "I have been managing my money well",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_19": {
+      "description": "I have felt happy with my overall quality of life",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_20": {
+      "description": "I have felt positive",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_b_question_21": {
+      "description": "I have had realistic hopes and goals for myself",
+      "type": "string",
+      "enum": ["All of the time", "Most of the time", "A fair amount of the time", "A little of the time", "None of the time"]
+    },
+    "sec_c_question_1": {
+      "description": "Reducing or abstaining from drinking or drug taking",
+      "type": "string",
+      "enum": ["Not important", "A little important", "Important", "Very important"]
+    },
+    "sec_c_question_2": {
+      "description": "Looking after yourself (physically taking care of yourself, mentally taking care of yourself, having a good diet, sleeping well, having a good routine)",
+      "type": "string",
+      "enum": ["Not important", "A little important", "Important", "Very important"]
+    },
+    "sec_c_question_3": {
+      "description": "Having good relationships with other people (getting on with people, feeling supported by people, being treated with respect, treating others with respect)",
+      "type": "string",
+      "enum": ["Not important", "A little important", "Important", "Very important"]
+    },
+    "sec_c_question_4": {
+      "description": "Having resources and belongings (stable housing, regular income, managing money)",
+      "type": "string",
+      "enum": ["Not important", "A little important", "Important", "Very important"]
+    },
+    "sec_c_question_5": {
+      "description": "Outlook on life (having a good quality of life, feeling positive, having realistic hopes and goals)",
+      "type": "string",
+      "enum": ["Not important", "A little important", "Important", "Very important"]
+    }
+  },
+  "required": [
+    "sec_a_question_1", "sec_a_question_2", "sec_a_question_3", "sec_a_question_4", "sec_a_question_5", "sec_a_question_6",
+    "sec_b_question_7", "sec_b_question_8", "sec_b_question_9", "sec_b_question_10", "sec_b_question_11", "sec_b_question_12",
+    "sec_b_question_13", "sec_b_question_14", "sec_b_question_15", "sec_b_question_16", "sec_b_question_17", "sec_b_question_18",
+    "sec_b_question_19", "sec_b_question_20", "sec_b_question_21",
+    "sec_c_question_1", "sec_c_question_2", "sec_c_question_3", "sec_c_question_4", "sec_c_question_5"
+  ]
+}

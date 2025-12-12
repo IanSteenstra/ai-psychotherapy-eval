@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "properties": {
+    "cultivating_change_talk": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "integer"
+        },
+        "reasoning": {
+          "type": "string"
+        }
+      },
+      "required": ["score", "reasoning"]
+    },
+    "softening_sustain_talk": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "integer"
+        },
+        "reasoning": {
+          "type": "string"
+        }
+      },
+      "required": ["score", "reasoning"]
+    },
+    "partnership": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "integer"
+        },
+        "reasoning": {
+          "type": "string"
+        }
+      },
+      "required": ["score", "reasoning"]
+    },
+    "empathy": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "integer"
+        },
+        "reasoning": {
+          "type": "string"
+        }
+      },
+      "required": ["score", "reasoning"]
+    }
+  },
+  "required": [
+    "cultivating_change_talk",
+    "softening_sustain_talk",
+    "partnership",
+    "empathy"
+  ]
+}

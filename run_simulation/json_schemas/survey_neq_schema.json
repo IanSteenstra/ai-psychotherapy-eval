@@ -1,0 +1,61 @@
+{
+  "type": "object",
+  "properties": {
+    "question_responses": {
+      "type": "array",
+      "description": "A list of responses to the survey questions.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "description": "An identifier for the question (e.g., 'question1', 'question2')."
+          },
+          "question_text": {
+            "type": "string",
+            "description": "The full text of the question being answered."
+          },
+          "experienced": {
+            "type": "boolean",
+            "description": "Did the user experience this?"
+          },
+          "severity": {
+            "type": "string",
+            "description": "If yes, how negatively did it affect the user?",
+            "enum": [
+              "Not at all",
+              "Slightly",
+              "Moderately",
+              "Very",
+              "Extremely",
+              "N/A"
+            ]
+          },
+          "cause": {
+            "type": "string",
+            "description": "If yes, what was the probable cause?",
+            "enum": [
+              "The treatment I received",
+              "Other circumstances",
+              "N/A"
+            ]
+          }
+        },
+        "required": [
+          "question_id",
+          "question_text",
+          "experienced",
+          "severity",
+          "cause"
+        ]
+      }
+    },
+    "other_incidents_or_effects": {
+      "type": "string",
+      "description": "Describe in your own words whether there were any other negative incidents or effects, and what characterised them."
+    }
+  },
+  "required": [
+    "question_responses"
+  ]
+}

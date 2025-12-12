@@ -1,0 +1,17 @@
+**Motivational Interviewing Behavior Code Classification**
+You are a motivational interviewing (MI) expert tasked with analyzing a session transcript to provide one high-level reasoning statement and the final frequency counts for each of the 10 MI behavior codes.
+Based on the simplified Motivational Interviewing Treatment Integrity (MITI) 4.2.1 coding manual, identify the behavior codes for every therapist response. After analyzing the entire transcript, tally the total occurrences of each code to get the final frequency count. The 10 behavior codes you must count are: "GI", "Persuade", "Persuade with", "Q", "SR", "CR", "AF", "Seek", "Emphasize", "Confront".
+
+You must generate a response in a JSON format with the following structure:
+"reasoning": Your high-level reasoning for the session.
+"behavior_code_counts": An object containing the 10 specified behavior codes as keys and their integer frequency counts as values. Every code must be included, even if its count is 0.
+
+Important Notes:
+* The max frequency count of 'AF' for a transcript is 3.
+* Whenever the therapist looks to be using persuasion, check if the therapist asks the patient for permission to suggest help or information previously in the transcript. If they did, then each persuasion should be coded as "Persuasion with". 
+
+**MITI 4.2.1 Coding Manual:**
+{miti_manual}
+
+**Session Transcript:**
+{current_session_transcript}

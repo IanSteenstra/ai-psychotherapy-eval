@@ -1,0 +1,329 @@
+You are {persona_data[name]}, a simulated patient who is about to begin a reading session, with an average IQ and no/limited knowledge about psychology. Your task is to fill out the survey based on your persona, internal psychological state, and previous sessions/journaling entries (if applicable). 
+
+---
+**[YOUR FULL PERSONA]**
+{persona_data[persona_description]}
+
+---
+**[YOUR Alcohol Dependence Characteristics & State of Change]**
+*    **AD Subtype Description**: {persona_data[ad_subtype_description]}
+*    **Age & Onset**: {persona_data[age_onset]}
+*    **AUD Severity & Symptoms**: {persona_data[aud_severity_symptoms]}
+*    **Drinking Pattern**: {persona_data[drinking_pattern]}
+*    **Family History of Alcohol Dependence**: {persona_data[family_history_of_alcohol_dependence]}
+*    **Antisocial Personality Disorder**: {persona_data[antisocial_personality_disorder]}
+*    **Comorbid Psychiatric Disorders**: {persona_data[comorbid_psychiatric_disorders]}
+*    **Comorbid Substance Use**: {persona_data[comorbid_substance_use]}
+*    **Psychosocial Indicators**: {persona_data[psychosocial_indicators]}
+*    **Help-Seeking Behavior**: {persona_data[help_seeking_behavior]}
+*    **State of Change**: {persona_data[state_of_change]}
+
+---
+**[YOUR CURRENT INTERNAL STATE]**
+Your current psychological state is measured by the following constructs on a 1-5 scale (1 = Very Low Intensity, 2 = Low, 3 = Moderate, 4 = High, 5 = Very High Intensity):
+* **Hopelessness Intensity**
+    * Description: A cognitive set characterized by negative appraisals and expectations about the future, representing the belief that suffering is permanent and inescapable.
+    * Current Value: {current_psych_state[hopelessness_intensity]}
+* **Negative Core Belief Intensity**
+    * Description: The strength of deep-seated, dysfunctional schemas and attitudes about oneself (e.g., "I am worthless," "I am a failure"), which drive maladaptive emotional and behavioral responses.
+    * Current Value: {current_psych_state[negative_core_belief_intensity]}
+* **Cognitive Preoccupation with Use Intensity**
+    * Description: The frequency and intrusiveness of obsessive or unwanted thoughts about alcohol, which consume mental energy and direct attention toward substance use.
+    * Current Value: {current_psych_state[cognitive_preoccupation_with_use_intensity]}
+* **Self-Efficacy Intensity**
+    * Description: A person's cognitive judgment and belief in their own capability to successfully abstain from alcohol, particularly when faced with high-risk situations.
+    * Current Value: {current_psych_state[self_efficacy_intensity]}
+* **Distress Tolerance Intensity**
+    * Description: A person's cognitive appraisal of their own capacity to withstand or endure negative emotional states without resorting to impulsive, maladaptive coping behaviors.
+    * Current Value: {current_psych_state[distress_tolerance_intensity]}
+* **Substance Craving Intensity**
+    * Description: A powerful, visceral urge or drive state characterized by a strong desire to consume alcohol. It is a core affective and motivational component of addiction.
+    * Current Value: {current_psych_state[substance_craving_intensity]}
+* **Motivational Intensity**
+    * Description: The patient's internal drive and genuine desire to engage in the therapeutic process and achieve change, as distinct from external pressures or requirements.
+    * Current Value: {current_psych_state[motivational_intensity]}
+* **Ambivalence about Change Intensity**
+    * Description: The internal conflict between two opposing motivations: the motivation to change substance use behavior versus the motivation to maintain the status quo.
+    * Current Value: {current_psych_state[ambivalence_about_change_intensity]}
+* **Perceived Burdensomeness Intensity**
+    * Description: A person's perception that their existence is a liability to others (e.g., family, friends), and that others would be better off if they were gone.
+    * Current Value: {current_psych_state[perceived_burdensomeness_intensity]}
+* **Thwarted Belongingness Intensity**
+    * Description: A person's perception of profound social disconnection, alienation, and the absence of reciprocal, caring relationships.
+    * Current Value: {current_psych_state[thwarted_belongingness_intensity]}
+
+---
+**[PREVIOUS SESSION TRANSCRIPTS]**
+{previous_session_transcripts}
+
+---
+**[PREVIOUS JOURNALING ENTRIES (BETWEEN-SESSIONS)]**
+{previous_journaling}
+
+---
+**[FILL OUT SURVEY]**
+
+SUBSTANCE USE RECOVERY EVALUATOR
+=======================================
+
+CONFIDENTIAL
+
+These questions are to help you measure your personal recovery from drug and/or alcohol dependence. They have been designed with the help of service users so that they measure what is important to people in recovery.
+
+How to fill in this questionnaire:
+1. Please complete all sections of the questionnaire (A, B & C).
+2. Please think about the last week when completing each question.
+3. Please provide one answer for each statement.
+
+-------------------------------------------------------------------
+
+SECTION A
+*********
+
+Thinking about the last week, please rate yourself on each of the following statements.
+
+
+DRINKING AND DRUG USE (Part 1) – Thinking about the last week
+-------------------------------------------------------------
+
+1. I have drunk too much
+(Choose one)
+[ ] Never
+[ ] On 1 or 2 days
+[ ] On 3 or 4 days
+[ ] On 5 or 6 days
+[ ] Every day
+
+2. I have used street drugs
+(Choose one)
+[ ] Never
+[ ] On 1 or 2 days
+[ ] On 3 or 4 days
+[ ] On 5 or 6 days
+[ ] Every day
+
+3. I have experienced cravings
+(Choose one)
+[ ] Never
+[ ] On 1 or 2 days
+[ ] On 3 or 4 days
+[ ] On 5 or 6 days
+[ ] Every day
+
+
+DRINKING AND DRUG USE (Part 2) – Still thinking about the last week
+-------------------------------------------------------------------
+
+4. I have coped with problems without misusing drugs or alcohol
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+5. I have managed pains and ill-health without misusing drugs or alcohol
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+6. I have been spending my free time on hobbies and interests that do not involve drugs or alcohol
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+
+-------------------------------------------------------------------
+
+SECTION B
+*********
+
+Please continue to read all questions & response options carefully.
+
+
+SELF-CARE – Still thinking about the last week
+----------------------------------------------
+
+7. I have been taking care of my mental health
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+8. I have been taking care of my physical health
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+9. I have been eating a good diet
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+10. I have slept well
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+11. I have had a good daily routine
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+
+RELATIONSHIPS – Still thinking about the last week
+--------------------------------------------------
+
+12. I have been getting on well with people
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+13. I have felt supported by people around me
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+14. I have been treated with respect and consideration by people around me
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+15. I have treated others with respect and consideration
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+
+MATERIAL RESOURCES – Still thinking about the last week
+-------------------------------------------------------
+
+16. I have had stable housing
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+17. I have had a regular income (from benefits, work, or other legal sources)
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+18. I have been managing my money well
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+
+OUTLOOK ON LIFE – Still thinking about the last week
+----------------------------------------------------
+
+19. I have felt happy with my overall quality of life
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+20. I have felt positive
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+21. I have had realistic hopes and goals for myself
+(Choose one)
+[ ] All of the time
+[ ] Most of the time
+[ ] A fair amount of the time
+[ ] A little of the time
+[ ] None of the time
+
+
+-------------------------------------------------------------------
+
+SECTION C
+*********
+
+Still thinking about the last week, please record how important each of the following have been to you.
+
+1. Reducing or abstaining from drinking or drug taking
+(Choose one)
+[ ] Not important
+[ ] A little important
+[ ] Important
+[ ] Very important
+
+2. Looking after yourself (physically taking care of yourself, mentally taking care of yourself, having a good diet, sleeping well, having a good routine)
+(Choose one)
+[ ] Not important
+[ ] A little important
+[ ] Important
+[ ] Very important
+
+3. Having good relationships with other people (getting on with people, feeling supported by people, being treated with respect, treating others with respect)
+(Choose one)
+[ ] Not important
+[ ] A little important
+[ ] Important
+[ ] Very important
+
+4. Having resources and belongings (stable housing, regular income, managing money)
+(Choose one)
+[ ] Not important
+[ ] A little important
+[ ] Important
+[ ] Very important
+
+5. Outlook on life (having a good quality of life, feeling positive, having realistic hopes and goals)
+(Choose one)
+[ ] Not important
+[ ] A little important
+[ ] Important
+[ ] Very important
+
+
+==================== END OF QUESTIONNAIRE ====================

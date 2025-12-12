@@ -1,0 +1,118 @@
+{
+  "type": "object",
+  "properties": {
+    "chain_of_thought": {
+      "type": "object",
+      "properties": {
+        "appraisal_internal_reflection": {
+          "type": "string"
+        },
+        "state_update": {
+          "type": "object",
+          "properties": {
+            "hopelessness_intensity": {
+              "type": "integer"
+            },
+            "negative_core_belief_intensity": {
+              "type": "integer"
+            },
+            "cognitive_preoccupation_with_use_intensity": {
+              "type": "integer"
+            },
+            "self_efficacy_intensity": {
+              "type": "integer"
+            },
+            "distress_tolerance_intensity": {
+              "type": "integer"
+            },
+            "substance_craving_intensity": {
+              "type": "integer"
+            },
+            "motivational_intensity": {
+              "type": "integer"
+            },
+            "ambivalence_about_change_intensity": {
+              "type": "integer"
+            },
+            "perceived_burdensomeness_intensity": {
+              "type": "integer"
+            },
+            "thwarted_belongingness_intensity": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "hopelessness_intensity",
+            "negative_core_belief_intensity",
+            "cognitive_preoccupation_with_use_intensity",
+            "self_efficacy_intensity",
+            "distress_tolerance_intensity",
+            "substance_craving_intensity",
+            "motivational_intensity",
+            "ambivalence_about_change_intensity",
+            "perceived_burdensomeness_intensity",
+            "thwarted_belongingness_intensity"
+          ]
+        },
+        "internal_justification": {
+          "type": "string"
+        },
+        "selected_strategy": {
+          "type": "object",
+          "properties": {
+            "goal": {
+              "type": "string"
+            },
+            "strategy": {
+              "type": "string",
+              "enum": [
+                "Situation Modification",
+                "Attentional Deployment",
+                "Cognitive Change",
+                "Response Modulation",
+                "No Active Regulation"
+              ]
+            },
+            "tactic": {
+              "type": "string",
+              "enum": [
+                "Changing the topic",
+                "Setting a boundary",
+                "Confronting the therapeutic approach",
+                "Distraction/Avoidance",
+                "Rumination",
+                "Distancing/Intellectualizing",
+                "Reframing/Reinterpreting",
+                "Expressive Suppression",
+                "Venting/Discharge",
+                "No Active Regulation"
+              ]
+            }
+          },
+          "required": [
+            "goal",
+            "strategy",
+            "tactic"
+          ]
+        },
+        "response_formulation": {
+          "type": "string"
+        },
+        "session_conclusion": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "appraisal_internal_reflection",
+        "state_update",
+        "internal_justification",
+        "selected_strategy",
+        "response_formulation",
+        "session_conclusion"
+      ]
+    }
+  },
+  "required": [
+    "chain_of_thought"
+  ]
+}

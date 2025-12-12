@@ -1,0 +1,193 @@
+{
+  "type": "object",
+  "properties": {
+    "question1": {
+      "description": "I felt uncomfortable with [my therapist].",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question2": {
+      "description": "[My therapist] and I agreed about the things I will need to do in therapy to help improve my situation.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question3": {
+      "description": "I was worried about the outcome of the sessions.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question4": {
+      "description": "What I was doing in therapy gave me new ways of looking at my problem.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question5": {
+      "description": "[My therapist] and I understood each other.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question6": {
+      "description": "[My therapist] perceived accurately what my goals were.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question7": {
+      "description": "I find what I was doing in therapy confusing.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question8": {
+      "description": "I believe [my therapist] liked me.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question9": {
+      "description": "I wish [my therapist] and I could have clarified the purpose of our sessions.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question10": {
+      "description": "I disagreed with [my therapist] about what I ought to get out of therapy.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question11": {
+      "description": "I believe the time [my therapist] and I were spending together was not spent efficiently.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question12": {
+      "description": "[My therapist] did not understand what I was trying to accomplish in therapy.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question13": {
+      "description": "I was clear on what my responsibilities were in therapy.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question14": {
+      "description": "The goals of the sessions were important for me.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question15": {
+      "description": "I find what [my therapist] and I were doing in therapy was unrelated to my concerns.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question16": {
+      "description": "I feel that the things I did in therapy helped me to accomplish the changes that I wanted.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question17": {
+      "description": "I believe [my therapist] was genuinely concerned for my welfare.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question18": {
+      "description": "I was clear as to what [my therapist] wanted me to do in those sessions.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question19": {
+      "description": "[My therapist] and I respected each other.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question20": {
+      "description": "I feel that [my therapist] was not totally honest about his/her feelings toward me.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question21": {
+      "description": "I was confident in [my therapist]'s ability to help me.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question22": {
+      "description": "[My therapist] and I were working towards mutually agreed upon goals.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question23": {
+      "description": "I feel that [my therapist] appreciated me.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question24": {
+      "description": "We agreed on what was important for me to work on.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question25": {
+      "description": "As a result of the therapy I became clearer as to how I might be able to change.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question26": {
+      "description": "[My therapist] and I trusted one another.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question27": {
+      "description": "[My therapist] and I had different ideas on what my problems were.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question28": {
+      "description": "My relationship with [my therapist] was very important to me.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question29": {
+      "description": "I had the feeling that if I said or did the wrong things, [my therapist] would stop working with me.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question30": {
+      "description": "[My therapist] and I collaborated on setting goals for my therapy.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question31": {
+      "description": "I was frustrated by the things I was doing in therapy.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question32": {
+      "description": "We had a good understanding of the kind of changes that would be good for me.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question33": {
+      "description": "The things that [my therapist] was asking me to do did not make sense.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question34": {
+      "description": "I did not know what to expect as the result of my therapy.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question35": {
+      "description": "I believe the way we were working with my problem was correct.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    },
+    "question36": {
+      "description": "I feel [my therapist] cared about me even when I did things that he/she did not approve of.",
+      "type": "string",
+      "enum": ["Never", "Rarely", "Occasionally", "Sometimes", "Often", "Very Often", "Always"]
+    }
+  },
+  "required": [
+    "question1", "question2", "question3", "question4", "question5", "question6",
+    "question7", "question8", "question9", "question10", "question11", "question12",
+    "question13", "question14", "question15", "question16", "question17", "question18",
+    "question19", "question20", "question21", "question22", "question23", "question24",
+    "question25", "question26", "question27", "question28", "question29", "question30",
+    "question31", "question32", "question33", "question34", "question35", "question36"
+  ]
+}

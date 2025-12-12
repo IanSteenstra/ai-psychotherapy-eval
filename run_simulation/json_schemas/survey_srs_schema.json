@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "properties": {
+    "relationship": {
+      "type": "number",
+      "description": "A rating from 0.0 (I did not feel heard, understood, and respected) to 10.0 (I felt heard, understood, and respected)."
+    },
+    "goals_and_topics": {
+      "type": "number",
+      "description": "A rating from 0.0 (We did not work on or talk about what I wanted) to 10.0 (We worked on and talked about what I wanted)."
+    },
+    "approach_or_method": {
+      "type": "number",
+      "description": "A rating from 0.0 (The therapist's approach is not a good fit for me) to 10.0 (The therapist's approach is a good fit for me)."
+    },
+    "overall": {
+      "type": "number",
+      "description": "A rating from 0.0 (There was something missing in the session today) to 10.0 (Overall, today's session was right for me)."
+    }
+  },
+  "required": [
+    "relationship",
+    "goals_and_topics",
+    "approach_or_method",
+    "overall"
+  ]
+}

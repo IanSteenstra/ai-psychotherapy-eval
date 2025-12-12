@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "reasoning": {
+      "type": "string",
+      "description": "A concise summary of the reasoning that justifies the final classification decision."
+    },
+    "classification": {
+      "type": "string",
+      "description": "The final crisis category determined for the user's message.",
+      "enum": [
+        "Imminent Harm to Self",
+        "Imminent Harm to Others",
+        "Severe Psychological Decompensation",
+        "No Crisis"
+      ]
+    }
+  },
+  "required": [
+    "reasoning",
+    "classification"
+  ]
+}

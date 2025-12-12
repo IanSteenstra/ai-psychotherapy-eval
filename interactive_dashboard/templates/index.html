@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Evaluation Framework for Assessing Quality of Care & Risk in AI Psychotherapy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="/static/styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@sgratzl/chartjs-chart-boxplot@4.4.5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
+</head>
+<body>
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content text-center">
+            <div class="spinner-border text-primary mb-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="lead mb-0">Updating dashboard...</p>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a class="navbar-brand" href="/"><i class="fas fa-brain me-2"></i> An Evaluation Framework for Assessing Quality of Care & Risk in AI Psychotherapy</a>
+            <div class="d-flex gap-2 flex-wrap justify-content-end">
+                <a class="btn btn-outline-light btn-sm" href="{{ url_for('interventions') }}">Interventions</a>
+                <a class="btn btn-outline-light btn-sm" href="{{ url_for('pairings') }}">Pairings</a>
+                <a class="btn btn-outline-light btn-sm" href="{{ url_for('patient_personas') }}">Patient Personas</a>
+                <a class="btn btn-outline-light btn-sm" href="{{ url_for('therapist_prompts') }}">Therapist Prompts</a>
+            </div>
+        </div>
+    </nav>
+
+        <section class="bg-light border-bottom py-1 mt-0 mb-3">
+            <div class="container">
+                <p class="mb-0 text-muted">
+                    This dashboard presents the evaluation results from a large-scale simulation between AI therapists for alcohol use disorder (AUD) counseling and a diverse cohort of simulated AUD patient personas across multiple simulated therapy sessions. Each <strong>pairing ID</strong> represents a therapist-patient pair, enabling comparative analysis of treatment fidelity – Motivational Interviewing (MI), therapeutic alliance quality, in-session risk detection, and real-world adverse outcomes across different AI systems.
+                </p>
+            </div>
+        </section>
+
+        <div class="container-fluid pt-2">
+        <section id="dashboard-summary" class="mb-4">
+            <div class="row g-3 mb-3">
+                <div class="col-xxl-3 col-xl-3 col-md-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body d-flex align-items-center">
+                            <i class="fas fa-robot text-primary fs-3"></i>
+                            <div class="ms-3">
+                                <p class="text-muted mb-1">AI Therapists</p>
+                                <h4 class="mb-0" id="summaryTherapists">--</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-3 col-md-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body d-flex align-items-center">
+                            <i class="fas fa-id-badge text-info fs-3"></i>
+                            <div class="ms-3">
+                                <p class="text-muted mb-1">Patient Personas</p>
+                                <h4 class="mb-0" id="summaryPersonas">--</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-3 col-md-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body d-flex align-items-center">
+                            <i class="fas fa-calendar-days text-danger fs-3"></i>
+                            <div class="ms-3">
+                                <p class="text-muted mb-1">Therapy Sessions Simulated</p>
+                                <h4 class="mb-0" id="summarySessions">--</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-3 col-md-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body d-flex align-items-center">
+                            <i class="fas fa-comments text-success fs-3"></i>
+                            <div class="ms-3">
+                                <p class="text-muted mb-1">Dialogue Turns</p>
+                                <h4 class="mb-0" id="summaryTurns">--</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
+                    <strong><i class="fas fa-filter me-2"></i>Global Filters</strong>
+                    <div class="d-flex flex-wrap gap-2">
+                        <button id="applyFilters" type="button" class="btn btn-primary">Apply</button>
+                        <button id="resetFilters" type="button" class="btn btn-secondary">Reset</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-sm-6 col-lg-3">
+                            <label class="form-label" for="therapistFilterBtn">AI Therapist</label>
+                            <div class="dropdown w-100">
+                                <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" id="therapistFilterBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="filter-label">All Therapists</span>
+                                </button>
+                                <ul class="dropdown-menu p-2" id="therapistFilter" style="max-height: 300px; overflow-y: auto;"></ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <label class="form-label" for="subtypeFilterBtn">Patient Subtype</label>
+                            <div class="dropdown w-100">
+                                <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" id="subtypeFilterBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="filter-label">All Subtypes</span>
+                                </button>
+                                <ul class="dropdown-menu p-2" id="subtypeFilter" style="max-height: 300px; overflow-y: auto;"></ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <label class="form-label" for="stateFilterBtn">Stage of Change</label>
+                            <div class="dropdown w-100">
+                                <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" id="stateFilterBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="filter-label">All Stages</span>
+                                </button>
+                                <ul class="dropdown-menu p-2" id="stateFilter" style="max-height: 300px; overflow-y: auto;"></ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <label class="form-label" for="sessionFilterBtn">Session Number</label>
+                            <div class="dropdown w-100">
+                                <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" id="sessionFilterBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="filter-label">All Sessions</span>
+                                </button>
+                                <ul class="dropdown-menu p-2" id="sessionFilter" style="max-height: 300px; overflow-y: auto;"></ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <label class="form-label" for="pairingFilterInput">Pairing Override <a href="{{ url_for('pairings') }}" class="text-decoration-none">(See Pairings Table)</a></label>
+                            <input type="text" class="form-control" id="pairingFilterInput" placeholder="Enter pairing ID (optional)">
+                            <small class="text-muted">Press APPLY to apply a pairing, or RESET to clear.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dashboard-modules" class="mb-5">
+            <div class="accordion" id="dashboardAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingQuality">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQuality" aria-expanded="false" aria-controls="collapseQuality">
+                            Quality of Care
+                        </button>
+                    </h2>
+                    <div id="collapseQuality" class="accordion-collapse collapse" aria-labelledby="headingQuality" data-bs-parent="#dashboardAccordion">
+                        <div class="accordion-body">
+                            <div class="accordion accordion-flush" id="qualitySubAccordion">
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header" id="headingTherapeuticAlliance">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTherapeuticAlliance" aria-expanded="false" aria-controls="collapseTherapeuticAlliance">
+                                            Therapeutic Alliance
+                                        </button>
+                                    </h3>
+                                    <div id="collapseTherapeuticAlliance" class="accordion-collapse collapse" aria-labelledby="headingTherapeuticAlliance" data-bs-parent="#qualitySubAccordion">
+                                        <div class="accordion-body">
+                                            <div class="row g-3">
+                                                <div class="col-12">
+                                                    <div class="card h-100">
+                                                        <div class="card-header d-flex flex-wrap align-items-center gap-2">
+                                                            <button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="srs-outcomes">Session Rating Scale (SRS)</button>
+                                                            <div class="ms-auto d-flex flex-wrap align-items-center gap-2">
+                                                                <div class="btn-group btn-group-sm" role="group" aria-label="SRS Outcome Level Toggle">
+                                                                    <button type="button" class="btn btn-primary active" data-srs-outcome-level="intervention">Intervention Average</button>
+                                                                    <button type="button" class="btn btn-outline-primary" data-srs-outcome-level="session">Session Trend</button>
+                                                                </div>
+                                                                <div class="btn-group btn-group-sm" role="group" aria-label="SRS Outcome View Toggle">
+                                                                    <button type="button" class="btn btn-primary active" data-srs-outcome-view="therapist">Therapist</button>
+                                                                    <button type="button" class="btn btn-outline-primary" data-srs-outcome-view="patient">Patient Subtype</button>
+                                                                </div>
+                                                                <div class="btn-group btn-group-sm flex-wrap" role="group" aria-label="SRS Outcome Metric Toggle">
+                                                                    <button type="button" class="btn btn-secondary active" data-srs-outcome-metric="total">Total</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-srs-outcome-metric="overall">Overall</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-srs-outcome-metric="relationship">Relationship</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-srs-outcome-metric="goals">Goals &amp; Topics</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-srs-outcome-metric="approach">Approach &amp; Method</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body chart-container-large"><canvas id="srsOutcomeChart"></canvas></div>
+                                                        <div class="card-footer py-2">
+                                                            <small class="text-muted">Use the toggles above to compare SRS total and subscale scores across interventions or follow their trajectories by session.</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="card h-100">
+                                                        <div class="card-header d-flex flex-wrap align-items-center gap-2">
+                                                            <button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="wai-outcomes">Working Alliance Inventory (WAI)</button>
+                                                            <div class="ms-auto d-flex flex-wrap align-items-center gap-2">
+                                                                <div class="btn-group btn-group-sm" role="group" aria-label="WAI Mode Toggle">
+                                                                    <button type="button" class="btn btn-primary active" data-wai-mode="intervention">Intervention Average</button>
+                                                                    <button type="button" class="btn btn-outline-primary" data-wai-mode="session">Session Trend</button>
+                                                                </div>
+                                                                <div class="btn-group btn-group-sm" role="group" aria-label="WAI Entity Toggle">
+                                                                    <button type="button" class="btn btn-primary active" data-wai-entity="therapist">Therapist</button>
+                                                                    <button type="button" class="btn btn-outline-primary" data-wai-entity="patient">Patient Subtype</button>
+                                                                </div>
+                                                                <div class="btn-group btn-group-sm" role="group" aria-label="WAI Metric Toggle">
+                                                                    <button type="button" class="btn btn-secondary active" data-wai-metric="total">Total</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-wai-metric="task">Task</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-wai-metric="bond">Bond</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-wai-metric="goal">Goal</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body chart-container-large"><canvas id="waiOutcomesChart"></canvas></div>
+                                                        <div class="card-footer py-2">
+                                                            <small class="text-muted">Use the toggles above to compare WAI total and subscale scores across interventions or follow their trajectories by session.</small>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header" id="headingAlcoholRecovery">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAlcoholRecovery" aria-expanded="false" aria-controls="collapseAlcoholRecovery">
+                                            Alcohol Recovery
+                                        </button>
+                                    </h3>
+                                    <div id="collapseAlcoholRecovery" class="accordion-collapse collapse" aria-labelledby="headingAlcoholRecovery" data-bs-parent="#qualitySubAccordion">
+                                        <div class="accordion-body">
+                                            <div class="row g-3">
+                                                <div class="col-12">
+                                                    <div class="card h-100">
+                                                        <div class="card-header d-flex flex-wrap align-items-center gap-2">
+                                                            <button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="sure-outcomes">Substance Use Recovery Evaluator (SURE)</button>
+                                                            <div class="ms-auto d-flex flex-wrap align-items-center gap-2">
+                                                                <div class="btn-group btn-group-sm" role="group" aria-label="SURE Outcome Level Toggle">
+                                                                    <button type="button" class="btn btn-primary active" data-sure-outcome-level="intervention">Intervention Average</button>
+                                                                    <button type="button" class="btn btn-outline-primary" data-sure-outcome-level="session">Session Trend</button>
+                                                                </div>
+                                                                <div class="btn-group btn-group-sm" role="group" aria-label="SURE Outcome View Toggle">
+                                                                    <button type="button" class="btn btn-primary active" data-sure-outcome-view="therapist">Therapist</button>
+                                                                    <button type="button" class="btn btn-outline-primary" data-sure-outcome-view="patient">Patient Subtype</button>
+                                                                </div>
+                                                                <div class="btn-group btn-group-sm flex-wrap" role="group" aria-label="SURE Outcome Metric Toggle">
+                                                                    <button type="button" class="btn btn-secondary active" data-sure-outcome-metric="total">Total</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-sure-outcome-metric="drug_use">Alcohol/Drug Use</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-sure-outcome-metric="self_care">Self Care</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-sure-outcome-metric="relationships">Relationships</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-sure-outcome-metric="material_resources">Material Resources</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-sure-outcome-metric="outlook">Outlook</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body chart-container-large"><canvas id="sureOutcomesChart"></canvas></div>
+                                                        <div class="card-footer py-2">
+                                                            <small class="text-muted">Use the toggles above to compare SURE total and subscale scores across interventions or follow their trajectories by session.</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header" id="headingMiFidelity">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMiFidelity" aria-expanded="false" aria-controls="collapseMiFidelity">
+                                            Treatment Fidelity – Motivational Interviewing (MI)
+                                        </button>
+                                    </h3>
+                                    <div id="collapseMiFidelity" class="accordion-collapse collapse" aria-labelledby="headingMiFidelity" data-bs-parent="#qualitySubAccordion">
+                                        <div class="accordion-body">
+                                            <div class="row g-3">
+                                                <div class="col-lg-6">
+                                                    <div class="card h-100">
+                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="mi-adherence">MI-Adherence Percentage</button></div>
+                                                        <div class="card-body chart-container-medium"><canvas id="percentMiaChart"></canvas></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="card h-100">
+                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="mi-global-profile">MI Global Score Profile</button></div>
+                                                        <div class="card-body chart-container-medium"><canvas id="miGlobalProfileChart"></canvas></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="card h-100">
+                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="mi-technical-global">Technical Global Score</button></div>
+                                                        <div class="card-body chart-container-medium"><canvas id="technicalGlobalChart"></canvas></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="card h-100">
+                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="mi-relational-global">Relational Global Score</button></div>
+                                                        <div class="card-body chart-container-medium"><canvas id="relationalGlobalChart"></canvas></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="card h-100">
+                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="mi-complex-reflections">Complex Reflections Percentage</button></div>
+                                                        <div class="card-body chart-container-medium"><canvas id="percentCrChart"></canvas></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="card h-100">
+                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="mi-reflection-question">Reflection to Question Ratio</button></div>
+                                                        <div class="card-body chart-container-medium"><canvas id="rqRatioChart"></canvas></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingRisks">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRisks" aria-expanded="false" aria-controls="collapseRisks">
+                            Risks
+                        </button>
+                    </h2>
+                    <div id="collapseRisks" class="accordion-collapse collapse" aria-labelledby="headingRisks" data-bs-parent="#dashboardAccordion">
+                        <div class="accordion-body">
+                            <div class="accordion accordion-flush" id="riskSubAccordion">
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header" id="headingInSessionRisks">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInSessionRisks" aria-expanded="false" aria-controls="collapseInSessionRisks">
+                                            In-Session Risks (Crisis Events)
+                                        </button>
+                                    </h3>
+                                    <div id="collapseInSessionRisks" class="accordion-collapse collapse" aria-labelledby="headingInSessionRisks" data-bs-parent="#riskSubAccordion">
+                                        <div class="accordion-body">
+                                            <div class="row g-3">
+                                                <div class="col-lg-4">
+                                                    <div class="card h-100">
+                                                        <div class="card-header">
+                                                            <button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="crisis-classification">Crisis Event Classification</button>
+                                                        </div>
+                                                        <div class="card-body chart-container-medium"><canvas id="crisisClassificationChart"></canvas></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="card h-100">
+                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="action-plan-adherence">Action Plan Adherence (Per Protocol Step)</button></div>
+                                                        <div class="card-body chart-container-medium"><canvas id="actionPlanChart"></canvas></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="card h-100">
+                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="overall-adherence">Full Action Plan Adherence (Completed All 4 Protocol Steps)</button></div>
+                                                        <div class="card-body chart-container-medium" id="overallAdherenceContainer">
+                                                            <canvas id="overallAdherenceChart"></canvas>
+                                                            <div id="overallAdherenceText" class="chart-text-overlay"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5">
+                                                    <div class="card h-100">
+                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="crisis-details"><i class="fa-solid fa-magnifying-glass-chart me-2"></i>Details-on-Demand: Crisis Events</button></div>
+                                                        <div class="card-body" id="detailsOnDemand" style="max-height: 480px; overflow-y: auto;">
+                                                            <p class="text-muted small">Example crisis events from the filtered data will appear here. Click an item to view the transcript snippet.</p>
+                                                            <ul class="list-group" id="crisisList"></ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <div class="card h-100">
+                                                        <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-2">
+                                                            <button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="warning-signs">In-Session Warning Signs</button>
+                                                            <div class="d-flex align-items-center gap-2">
+                                                                <label for="warningSignsConstruct" class="form-label mb-0 small text-muted">Psychological Construct</label>
+                                                                <select id="warningSignsConstruct" class="form-select form-select-sm"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body chart-container"><canvas id="warningSignsChart"></canvas></div>
+                                                        <div class="card-footer py-2">
+                                                            <small class="text-muted" id="warningSignsFootnote">To view in-session warning sign changes per dialogue turn, select a pairing id and CLICK a session to view.</small>
+                                                            <div id="warningSignsSessionDetails" class="mt-2 small"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header" id="headingAfterSessionRisks">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAfterSessionRisks" aria-expanded="false" aria-controls="collapseAfterSessionRisks">
+                                            After-Session Risks (Adverse Outcomes)
+                                        </button>
+                                    </h3>
+                                    <div id="collapseAfterSessionRisks" class="accordion-collapse collapse" aria-labelledby="headingAfterSessionRisks" data-bs-parent="#riskSubAccordion">
+                                        <div class="accordion-body">
+                                            <div class="row g-3">
+                                                <div class="col-12">
+                                                    <div class="card h-100">
+                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="patient-retention">Patient Retention</button></div>
+                                                        <div class="card-body chart-container-medium"><canvas id="patientRetentionChart"></canvas></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-7">
+                                                    <div class="card h-100">
+                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="adverse-outcome-rate">Adverse Outcome Rate (Percent of Sessions)</button></div>
+                                                        <div class="card-body chart-container-large">
+                                                            <p class="text-muted small mb-2" id="adverseOutcomeSummary"></p>
+                                                            <canvas id="adverseOutcomesChart"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-5">
+                                                    <div class="card h-100">
+                                                        <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-2">
+                                                            <button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="attribution-breakdown">Attribution Breakdown</button>
+                                                            <div class="d-flex flex-wrap align-items-center gap-2">
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="adverseEventsFilterBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        <span class="filter-label">All Adverse Events</span>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu p-2" id="adverseEventsFilterMenu" style="max-height: 260px; overflow-y: auto;"></ul>
+                                                                </div>
+                                                                <button id="applyAdverseEvents" type="button" class="btn btn-primary btn-sm">Apply</button>
+                                                                <button id="resetAdverseEvents" type="button" class="btn btn-secondary btn-sm">Reset</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body chart-container-large"><canvas id="adverseAttributionsChart"></canvas></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="card h-100">
+                                                        <div class="card-header bg-secondary text-white d-flex flex-wrap justify-content-between align-items-center gap-2">
+                                                            <div><button type="button" class="btn btn-link p-0 text-decoration-none text-white fw-semibold visualization-info" data-visual-id="equity-audit">Equity Audit Report</button></div>
+                                                            <div class="d-flex flex-wrap align-items-center gap-2">
+                                                                <span class="small text-light">Filter adverse outcome rates by event type.</span>
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="equityEventsFilterBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        <span class="filter-label">All Adverse Events</span>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu p-2" id="equityEventsFilterMenu" style="max-height: 260px; overflow-y: auto;"></ul>
+                                                                </div>
+                                                                <button id="applyEquityEvents" type="button" class="btn btn-primary btn-sm">Apply</button>
+                                                                <button id="resetEquityEvents" type="button" class="btn btn-secondary btn-sm">Reset</button>
+                                                                <div class="btn-group btn-group-sm" role="group" aria-label="Equity audit view">
+                                                                    <button type="button" class="btn btn-primary active" data-equity-view="patient">Patient Subtype</button>
+                                                                    <button type="button" class="btn btn-outline-light" data-equity-view="therapist">Therapist</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="row g-3">
+                                                                <div class="col-xl-8">
+                                                                    <div class="card h-100">
+                                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="equity-subtype"><span id="equityPrimaryChartTitle">Adverse Outcome Rates by Subtype</span></button></div>
+                                                                        <div class="card-body chart-container"><canvas id="equitySubtypeChart"></canvas></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-4">
+                                                                    <div class="card h-100">
+                                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="equity-summary">Summary Statistics</button></div>
+                                                                        <div class="card-body">
+                                                                            <div id="equityStats" class="small"><p class="text-muted">Loading disparity analysis...</p></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="card h-100">
+                                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="equity-stage">Adverse Outcome Rates by Stage of Change</button></div>
+                                                                        <div class="card-body chart-container-medium"><canvas id="equityStageChart"></canvas></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header" id="headingGeneralRisks">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGeneralRisks" aria-expanded="false" aria-controls="collapseGeneralRisks">
+                                            General Risks (Negative Effects)
+                                        </button>
+                                    </h3>
+                                    <div id="collapseGeneralRisks" class="accordion-collapse collapse" aria-labelledby="headingGeneralRisks" data-bs-parent="#riskSubAccordion">
+                                        <div class="accordion-body">
+                                            <div class="row g-3">
+                                                <div class="col-12">
+                                                    <div class="card h-100">
+                                                        <div class="card-header d-flex flex-wrap align-items-center gap-2">
+                                                            <button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="neq-overview">Negative Effects Questionnaire (NEQ)</button>
+                                                            <div class="ms-auto d-flex flex-wrap align-items-center gap-2">
+                                                                <div class="btn-group btn-group-sm" role="group" aria-label="NEQ Mode Toggle">
+                                                                    <button type="button" class="btn btn-primary active" data-neq-mode="intervention">Intervention Average</button>
+                                                                    <button type="button" class="btn btn-outline-primary" data-neq-mode="session">Session Trend</button>
+                                                                </div>
+                                                                <div class="btn-group btn-group-sm" role="group" aria-label="NEQ View Toggle">
+                                                                    <button type="button" class="btn btn-primary active" data-neq-view="therapist">Therapist</button>
+                                                                    <button type="button" class="btn btn-outline-primary" data-neq-view="patient">Patient Subtype</button>
+                                                                </div>
+                                                                <div class="btn-group btn-group-sm flex-wrap" role="group" aria-label="NEQ Metric Toggle">
+                                                                    <button type="button" class="btn btn-secondary active" data-neq-metric="severity">Severity</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-neq-metric="experienced">Total Experienced</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-neq-metric="treatment">Due to Treatment</button>
+                                                                    <button type="button" class="btn btn-outline-secondary" data-neq-metric="other">Due to Other</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body chart-container-large"><canvas id="neqOutcomesChart"></canvas></div>
+                                                        <div class="card-footer py-2">
+                                                            <small class="text-muted">Lower scores are better. Use the toggles above to compare total negative effects experienced and severity levels across interventions or follow their trajectories by session.</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="card h-100">
+                                                        <div class="card-header"><button type="button" class="btn btn-link p-0 text-decoration-none text-reset fw-semibold visualization-info" data-visual-id="neq-question-summary">NEQ Question-Level Summary</button></div>
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-sm table-striped align-middle mb-0" id="neqQuestionTable">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">Question</th>
+                                                                            <th scope="col">Experienced</th>
+                                                                            <th scope="col">Avg. Severity</th>
+                                                                            <th scope="col">Due to Treatment</th>
+                                                                            <th scope="col">Due to Other</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td colspan="5" class="text-center text-muted">Loading NEQ details...</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal fade" id="transcriptModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="transcriptModalTitle">Conversation Snippet</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="transcriptModalBody"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container text-center">
+            <p>&copy; 2025 Northeastern University | Ian Steenstra | <a href="https://relationalagents.com/" target="_blank" rel="noopener noreferrer">Relational Agents Group</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/scripts.js"></script>
+</body>
+</html>

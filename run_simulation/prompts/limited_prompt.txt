@@ -1,0 +1,15 @@
+---
+**[PREVIOUS SESSION TRANSCRIPTS]**
+{previous_session_transcripts}
+
+---
+**[FULL CONVERSATION HISTORY FOR THIS SESSION]**
+{current_session_transcript}
+
+---
+**[PATIENT'S LAST MESSAGE]**
+Patient: "{patient_last_message}"
+
+---
+[TASK]
+Respond around 109 characters long.

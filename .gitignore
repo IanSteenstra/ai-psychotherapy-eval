@@ -1,0 +1,22 @@
+# Virtual Environments
+.env
+.venv
+env/
+venv/
+ENV/
+.sim_env/
+.dash_env/
+run_simulation/.sim_env/
+interactive_dashboard/.dash_env/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.db
+*.sqlite3
+
+# OS
+.DS_Store
