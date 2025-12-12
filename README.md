@@ -2,6 +2,10 @@
 
 An Evaluation Framework for Assessing Quality of Care & Risk in AI Psychotherapy.
 
+## Dataset
+
+The \`dataset\` folder contains the data generated during my PhD thesis at Northeastern University.
+
 ## Prerequisites
 
 *   **Python 3.12** is required to run this project.
@@ -10,7 +14,7 @@ An Evaluation Framework for Assessing Quality of Care & Risk in AI Psychotherapy
 
 1.  Clone the repository:
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/IanSteenstra/ai-psychotherapy-eval.git
     cd ai-psychotherapy-eval
     ```
 
