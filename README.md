@@ -1,4 +1,4 @@
-# ai-psychotherapy-eval
+# AI Psychotherapy Eval
 
 An Evaluation Framework for Assessing Quality of Care & Risk in AI Psychotherapy.
 
