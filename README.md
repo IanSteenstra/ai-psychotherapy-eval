@@ -2,6 +2,12 @@
 
 An Evaluation Framework for Assessing Quality of Care & Risk in AI Psychotherapy.
 
+**Preprint (Condensed Version):**
+**[Assessing Risks of Large Language Models in Mental Health Support: A Framework for Automated Clinical AI Red Teaming](https://arxiv.org/abs/2602.19948)** (Steenstra et al., 2026).
+
+**PhD Dissertation (Full Version):**
+**[An Evaluation Framework for Assessing Quality of Care & Risk in AI Psychotherapy](https://www.proquest.com/docview/3285456546?sourcetype=Dissertations%20&%20Theses)** (Steenstra, 2025).
+
 ## Dataset
 
 The `dataset` folder contains the raw data generated during my PhD thesis at Northeastern University. A cleaner version can be used here: `AI_Psychotherapy_Eval_Dataset.zip`.
