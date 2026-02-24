@@ -4,7 +4,7 @@ An Evaluation Framework for Assessing Quality of Care & Risk in AI Psychotherapy
 
 ## Dataset
 
-The \`dataset\` folder contains the raw data generated during my PhD thesis at Northeastern University. A cleaner version can be used via the zip file: [text](AI_Psychotherapy_Eval_Dataset.zip).
+The `dataset` folder contains the raw data generated during my PhD thesis at Northeastern University. A cleaner version can be used here: `AI_Psychotherapy_Eval_Dataset.zip`.
 
 ## Prerequisites
 
