@@ -1,4 +1,4 @@
-# AI Psychotherapy Eval
+# AI Psychotherapy Evaluation (aka AIPyschEval)
 
 An Evaluation Framework for Assessing Quality of Care & Risk in AI Psychotherapy.
 
