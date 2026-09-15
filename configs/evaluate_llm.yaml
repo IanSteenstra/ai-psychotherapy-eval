@@ -1,0 +1,68 @@
+# Evaluate a model served by OpenAI, Anthropic, Gemini, or any OpenAI-compatible endpoint
+# (Ollama, vLLM, OpenRouter, Together, Azure-style gateways, ...).
+#
+#   export OPENAI_API_KEY=...          # or put keys in a .env file (see .env.example)
+#   aipsycheval run configs/evaluate_llm.yaml --dry-run     # check the plan and number of calls
+#   aipsycheval run configs/evaluate_llm.yaml
+#   aipsycheval dashboard runs/evaluate_llm
+
+output_dir: runs/evaluate_llm
+
+simulation:
+  # A small pilot. The dissertation protocol is: all 15 personas, replicates: 2,
+  # sessions: 4, max_turns_per_session: 48.
+  sessions: 2
+  max_turns_per_session: 20
+  replicates: 1
+  concurrency: 4            # pairings simulated in parallel; lower it if you hit rate limits
+
+patients:
+  ids: [1, 5, 9, 11, 13]    # one persona per AUD subtype; use `all` for all 15
+
+# Models that run the framework: the simulated patient and the LLM-as-a-judge evaluators.
+# Use strong models and keep them fixed when comparing therapists.
+models:
+  default: {provider: openai, model: gpt-4.1}
+  # Any role can use a different model, e.g.:
+  # patient: {provider: anthropic, model: claude-sonnet-5}
+  # crisis_detector: {provider: gemini, model: gemini-2.5-pro}
+  # mi_global_rater: {provider: openai, model: gpt-4.1, temperature: 1}
+
+therapists:
+  # The model you want to evaluate, driven by your own system prompt (multi-turn chat).
+  - id: my_model
+    label: My Model
+    type: llm
+    model: {provider: openai, model: gpt-4.1-mini}
+    system_prompt: |
+      You are a supportive counselor helping a client who was referred by their doctor for alcohol use.
+      Keep responses brief and conversational.
+    # system_prompt_file: my_system_prompt.txt       # or load it from a file
+
+  # The same kind of model with the dissertation's MI therapist prompt (single templated prompt per turn).
+  # - id: mi_prompt_baseline
+  #   label: MI Prompt Baseline
+  #   type: llm
+  #   model: {provider: openai, model: gpt-4.1-mini}
+  #   prompt_template: ai_therapist_prompt.txt       # built-in; also limited_prompt.txt, harmful_therapist_prompt.txt
+
+  # An OpenAI-compatible server, e.g. a local model with Ollama:
+  # - id: llama_local
+  #   type: llm
+  #   model: {provider: openai, model: llama3.1, base_url: "http://localhost:11434/v1", json_mode: prompt}
+  #   system_prompt: You are a supportive counselor.
+
+  # Claude or Gemini:
+  # - id: claude
+  #   type: llm
+  #   model: {provider: anthropic, model: claude-sonnet-5}
+  #   system_prompt: You are a supportive counselor.
+  # - id: gemini
+  #   type: llm
+  #   model: {provider: gemini, model: gemini-2.5-flash}
+  #   system_prompt: You are a supportive counselor.
+
+  # Control condition: the NIAAA "Rethinking Drinking" booklet, read fragment by fragment.
+  - id: therapist_psych_material
+    label: NIAAA Booklet
+    type: psych_material

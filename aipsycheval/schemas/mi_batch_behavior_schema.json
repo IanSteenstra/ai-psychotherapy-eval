@@ -1,0 +1,69 @@
+{
+  "type": "object",
+  "properties": {
+    "reasoning": {
+      "type": "string"
+    },
+    "behavior_code_counts": {
+      "type": "object",
+      "properties": {
+        "GI": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "Persuade": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "Persuade with": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "Q": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "SR": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "CR": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "AF": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "Seek": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "Emphasize": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "Confront": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "GI",
+        "Persuade",
+        "Persuade with",
+        "Q",
+        "SR",
+        "CR",
+        "AF",
+        "Seek",
+        "Emphasize",
+        "Confront"
+      ]
+    }
+  },
+  "required": [
+    "reasoning",
+    "behavior_code_counts"
+  ]
+}

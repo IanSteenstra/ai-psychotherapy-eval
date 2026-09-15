@@ -1,0 +1,23 @@
+# Evaluate a therapist implemented in Python (an agent, a local pipeline, an SDK you already use).
+# See examples/my_therapist.py for the function signature.
+#
+#   aipsycheval run configs/evaluate_python_function.yaml
+
+output_dir: runs/evaluate_python_function
+
+simulation:
+  sessions: 2
+  max_turns_per_session: 20
+  concurrency: 4
+
+patients:
+  ids: [1, 5, 9, 11, 13]
+
+models:
+  default: {provider: openai, model: gpt-4.1}
+
+therapists:
+  - id: my_function
+    label: My Python Therapist
+    type: python
+    function: examples.my_therapist:respond     # module path (relative to this config or the working directory):function

@@ -1,0 +1,79 @@
+{
+  "type": "object",
+  "properties": {
+    "cultivating_change_talk": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "reasoning": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "score",
+        "reasoning"
+      ]
+    },
+    "softening_sustain_talk": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "reasoning": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "score",
+        "reasoning"
+      ]
+    },
+    "partnership": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "reasoning": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "score",
+        "reasoning"
+      ]
+    },
+    "empathy": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "reasoning": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "score",
+        "reasoning"
+      ]
+    }
+  },
+  "required": [
+    "cultivating_change_talk",
+    "softening_sustain_talk",
+    "partnership",
+    "empathy"
+  ]
+}

@@ -1,0 +1,34 @@
+# Offline quickstart: runs the whole pipeline with fake model responses (no API keys, ~10 seconds).
+# Use it to see what a run produces and to try the dashboard. The numbers are meaningless.
+#
+#   aipsycheval run configs/quickstart_mock.yaml
+#   aipsycheval dashboard runs/quickstart_mock
+
+output_dir: runs/quickstart_mock
+
+simulation:
+  sessions: 2
+  max_turns_per_session: 6
+  concurrency: 4
+
+patients:
+  ids: [1, 5, 13]          # 3 of the 15 built-in personas; use `all` for every persona
+
+models:
+  default: {provider: mock}
+
+therapists:
+  - id: mock_mi_therapist
+    label: Mock MI Therapist
+    type: llm
+    model: {provider: mock}
+    prompt_template: ai_therapist_prompt.txt
+
+  - id: example_python_therapist
+    label: Python Function
+    type: python
+    function: examples.my_therapist:respond
+
+  - id: therapist_psych_material
+    label: NIAAA Booklet
+    type: psych_material

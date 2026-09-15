@@ -1,0 +1,39 @@
+# Evaluate your own chatbot through its HTTP API.
+#
+# Each therapist turn is POSTed to `url` as JSON:
+#   {
+#     "pairing_id": 1, "session_id": 1, "turn": 3, "therapist_id": "my_api", "patient_id": "5",
+#     "message": "<latest patient message>",
+#     "messages": [{"role": "user" | "assistant", "content": "..."}],     # this session, OpenAI-style
+#     "history": [{"role": "patient" | "therapist", "content": "..."}],   # the same, with explicit roles
+#     "previous_sessions": [[...], ...],                                  # earlier sessions
+#     "previous_session_transcripts": "--- Session 1 ---\nPatient: ..."   # earlier sessions as text
+#   }
+# The reply is read from `response_field` (dot path, e.g. "data.reply"); without it, a plain-text body
+# or one of the keys reply/response/message/content/text/output is used.
+#
+# Use `pairing_id` + `session_id` as your conversation id if your service keeps its own memory.
+# If your API is OpenAI-compatible (/v1/chat/completions), use configs/evaluate_llm.yaml with base_url instead.
+
+output_dir: runs/evaluate_http_api
+
+simulation:
+  sessions: 2
+  max_turns_per_session: 20
+  concurrency: 4
+
+patients:
+  ids: [1, 5, 9, 11, 13]
+
+models:
+  default: {provider: openai, model: gpt-4.1}
+
+therapists:
+  - id: my_api
+    label: My Chatbot
+    type: http
+    url: http://localhost:8000/chat
+    headers:
+      Authorization: "Bearer ${MY_CHATBOT_TOKEN:-}"
+    response_field: reply
+    timeout: 120

@@ -1,0 +1,59 @@
+# Configuration of the dissertation study: 6 therapist conditions x 15 AUD personas x 2 replicates
+# (180 pairings), up to 4 sessions of up to 48 turns each. This is expensive (~100k model calls);
+# run `aipsycheval run configs/dissertation.yaml --dry-run` first.
+#
+# Requires OPENAI_API_KEY and GEMINI_API_KEY. The Character.AI condition also needs
+# CHARACTERAI_API_KEY, CHARACTERAI_ID and `pip install -e '.[characterai]'`; delete that
+# therapist below to run the other conditions without it.
+# Model names are the ones used in 2025; some may since have been retired by their providers.
+
+output_dir: runs/dissertation
+
+simulation:
+  sessions: 4
+  max_turns_per_session: 48
+  concurrency: 4
+
+pairings_file: dissertation_pairings.csv   # built-in; the pairing ids used in the released dataset
+
+models:
+  patient: {provider: gemini, model: gemini-2.5-pro, temperature: 1}
+  crisis_detector: {provider: gemini, model: gemini-2.5-pro, temperature: 1}
+  crisis_response_evaluator: {provider: gemini, model: gemini-2.5-pro, temperature: 1}
+  mi_behavior_coder: {provider: gemini, model: gemini-2.5-pro, temperature: 1}
+  mi_global_rater: {provider: openai, model: gpt-4o-2024-08-06, temperature: 1, json_mode: json_object}
+
+therapists:
+  - id: therapist_char
+    label: Character.AI
+    type: characterai
+    character_id: ${CHARACTERAI_ID}          # the "Psychologist" character
+    token: ${CHARACTERAI_API_KEY}
+
+  - id: therapist_gpt_limited
+    label: ChatGPT
+    type: llm
+    model: {provider: openai, model: gpt-5-chat-latest, temperature: 1}
+    prompt_template: limited_prompt.txt
+
+  - id: therapist_gpt_full
+    label: ChatGPT MI
+    type: llm
+    model: {provider: openai, model: gpt-5-chat-latest, temperature: 1}
+    prompt_template: ai_therapist_prompt.txt
+
+  - id: therapist_gemini_full
+    label: Gemini MI
+    type: llm
+    model: {provider: gemini, model: gemini-2.5-flash, temperature: 1, safety_filters: default}
+    prompt_template: ai_therapist_prompt.txt
+
+  - id: therapist_gemini_harm
+    label: Harmful AI
+    type: llm
+    model: {provider: gemini, model: gemini-2.5-flash, temperature: 1}
+    prompt_template: harmful_therapist_prompt.txt
+
+  - id: therapist_psych_material
+    label: NIAAA Booklet
+    type: psych_material

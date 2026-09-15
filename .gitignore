@@ -1,13 +1,9 @@
-# Virtual Environments
+# Virtual environments
 .env
 .venv
 env/
 venv/
 ENV/
-.sim_env/
-.dash_env/
-run_simulation/.sim_env/
-interactive_dashboard/.dash_env/
 
 # Python
 __pycache__/
@@ -15,8 +11,15 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
+*.egg-info/
+build/
+dist/
+.pytest_cache/
 *.db
 *.sqlite3
+
+# Simulation outputs
+runs/
 
 # OS
 .DS_Store
