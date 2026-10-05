@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this repository or the dataset, please cite the paper below."
+title: "AI Psychotherapy Evaluation (AIPsychEval)"
+type: software
+authors:
+  - family-names: Steenstra
+    given-names: Ian
+version: 1.0.0
+license: Apache-2.0
+repository-code: "https://github.com/IanSteenstra/ai-psychotherapy-eval"
+preferred-citation:
+  type: article
+  title: "Assessing Risks of Large Language Models in Mental Health Support: A Framework for Automated Clinical AI Red Teaming"
+  authors:
+    - family-names: Steenstra
+      given-names: Ian
+    - family-names: Pedrelli
+      given-names: Paola
+    - family-names: Shi
+      given-names: Weiyan
+    - family-names: Marsella
+      given-names: Stacy
+    - family-names: Bickmore
+      given-names: Timothy W.
+  journal: "arXiv preprint arXiv:2602.19948"
+  year: 2026
+  doi: 10.48550/arXiv.2602.19948
+  url: "https://arxiv.org/abs/2602.19948"

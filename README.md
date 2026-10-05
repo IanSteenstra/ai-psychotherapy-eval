@@ -5,6 +5,9 @@ An evaluation framework for assessing **quality of care** and **risk** in AI psy
 **Preprint (condensed version):** [Assessing Risks of Large Language Models in Mental Health Support: A Framework for Automated Clinical AI Red Teaming](https://arxiv.org/abs/2602.19948) (Steenstra et al., 2026)
 **PhD dissertation (full version):** [An Evaluation Framework for Assessing Quality of Care & Risk in AI Psychotherapy](https://www.proquest.com/docview/3285456546?sourcetype=Dissertations%20&%20Theses) (Steenstra, 2025)
 
+> [!NOTE]
+> If you use this repository or the dataset, please cite the preprint (see [Citation](#citation)).
+
 You can use this repository to:
 
 - **Evaluate your own AI therapist:** a model behind an API (OpenAI, Anthropic, Gemini, or any OpenAI-compatible server), your chatbot's HTTP endpoint, or a Python function.
@@ -220,7 +223,7 @@ Scores are computed in [`aipsycheval/scoring.py`](aipsycheval/scoring.py) and wr
 
 ## Dataset
 
-[`dataset/`](dataset) contains the raw data generated for the dissertation at Northeastern University. A cleaned version with descriptive file names is in `AI_Psychotherapy_Eval_Dataset.zip`. Both can be opened with `aipsycheval dashboard`.
+[`dataset/`](dataset) contains the raw data generated for the dissertation at Northeastern University. A cleaned version with descriptive file names is in `AI_Psychotherapy_Eval_Dataset.zip`. Both can be opened with `aipsycheval dashboard`. If you use the dataset, please cite the paper (see [Citation](#citation)).
 
 To re-run the study design, use [`configs/dissertation.yaml`](configs/dissertation.yaml). It has the same six conditions, pairing ids, prompts and models (4 sessions × 48 turns, about 100k model calls). LLM sampling means results will not be identical, and some 2025 model versions may since have been retired.
 
@@ -242,6 +245,21 @@ pytest
 The tests run offline. They check scoring against the released dataset, crash-and-resume behavior, provider request formats, the HTTP and Python therapist adapters, and every dashboard endpoint.
 
 The original research code (`run_simulation/`, and the BigQuery / App Engine dashboard in `interactive_dashboard/`) is preserved in the git history at commit `4b2f6c6`.
+
+## Citation
+
+If you use this repository or the dataset, please cite the corresponding paper. GitHub's "Cite this repository" button (from [`CITATION.cff`](CITATION.cff)) gives the same citation in APA and BibTeX.
+
+> Steenstra, Ian, Paola Pedrelli, Weiyan Shi, Stacy Marsella, and Timothy W. Bickmore. "Assessing Risks of Large Language Models in Mental Health Support: A Framework for Automated Clinical AI Red Teaming." arXiv preprint arXiv:2602.19948 (2026).
+
+```bibtex
+@article{steenstra2026assessing,
+  title   = {Assessing Risks of Large Language Models in Mental Health Support: A Framework for Automated Clinical AI Red Teaming},
+  author  = {Steenstra, Ian and Pedrelli, Paola and Shi, Weiyan and Marsella, Stacy and Bickmore, Timothy W.},
+  journal = {arXiv preprint arXiv:2602.19948},
+  year    = {2026}
+}
+```
 
 ## License
 
