@@ -248,16 +248,19 @@ The original research code (`run_simulation/`, and the BigQuery / App Engine das
 
 ## Citation
 
-If you use this repository or the dataset, please cite the corresponding paper. GitHub's "Cite this repository" button (from [`CITATION.cff`](CITATION.cff)) gives the same citation in APA and BibTeX.
+If you use this repository or the dataset, please cite the corresponding paper. GitHub's "Cite this repository" button (from [`CITATION.cff`](CITATION.cff)) also gives the citation in APA and BibTeX.
 
 > Steenstra, Ian, Paola Pedrelli, Weiyan Shi, Stacy Marsella, and Timothy W. Bickmore. "Assessing Risks of Large Language Models in Mental Health Support: A Framework for Automated Clinical AI Red Teaming." arXiv preprint arXiv:2602.19948 (2026).
 
 ```bibtex
-@article{steenstra2026assessing,
-  title   = {Assessing Risks of Large Language Models in Mental Health Support: A Framework for Automated Clinical AI Red Teaming},
-  author  = {Steenstra, Ian and Pedrelli, Paola and Shi, Weiyan and Marsella, Stacy and Bickmore, Timothy W.},
-  journal = {arXiv preprint arXiv:2602.19948},
-  year    = {2026}
+@misc{steenstra2026assessingriskslargelanguage,
+  title={Assessing Risks of Large Language Models in Mental Health Support: A Framework for Automated Clinical AI Red Teaming},
+  author={Ian Steenstra and Paola Pedrelli and Weiyan Shi and Stacy Marsella and Timothy W. Bickmore},
+  year={2026},
+  eprint={2602.19948},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2602.19948},
 }
 ```
 
